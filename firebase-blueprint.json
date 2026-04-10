@@ -37,6 +37,21 @@
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["uid", "email"]
+    },
+    "Friendship": {
+      "title": "Friendship",
+      "description": "A relationship between two users.",
+      "type": "object",
+      "properties": {
+        "userUids": { 
+          "type": "array", 
+          "items": { "type": "string" },
+          "description": "Array containing the UIDs of the two friends."
+        },
+        "status": { "type": "string", "enum": ["accepted"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userUids", "status"]
     }
   },
   "firestore": {
@@ -47,6 +62,10 @@
     "/users/{userId}": {
       "schema": "UserProfile",
       "description": "User profile documents."
+    },
+    "/friendships/{friendshipId}": {
+      "schema": "Friendship",
+      "description": "Collection of friend relationships."
     }
   }
 }
