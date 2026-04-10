@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "Workout": {
+      "title": "Workout",
+      "description": "A single workout session record.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The UID of the user who owns this record." },
+        "rawText": { "type": "string", "description": "The original text input from the user." },
+        "date": { "type": "string", "format": "date-time", "description": "The date and time of the workout." },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "sets": { "type": "number" },
+              "reps": { "type": "number" },
+              "weight": { "type": "number" },
+              "unit": { "type": "string", "enum": ["kg", "lbs"] }
+            }
+          }
+        },
+        "analysis": { "type": "string", "description": "AI generated summary or analysis." }
+      },
+      "required": ["userId", "rawText", "date"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/workouts/{workoutId}": {
+      "schema": "Workout",
+      "description": "Collection of workout records."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents."
+    }
+  }
+}

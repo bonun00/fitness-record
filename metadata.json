@@ -1,0 +1,5 @@
+{
+  "name": "FitTrack AI",
+  "description": "AI-powered workout tracker that analyzes text descriptions into structured records.",
+  "requestFramePermissions": []
+}
